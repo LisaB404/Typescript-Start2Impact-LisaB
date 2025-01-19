@@ -83,7 +83,7 @@ class Platform implements IPlatform {
     }
 
     publishContent(professional: IProfessionalMedia, content: string): void {
-        console.log(`The professional ${professional.name} ${professional.surname} published new content: "${content}", on the platform:  ${this.type} ${this.name}`);
+        console.log(`The professional ${professional.name} ${professional.surname} published the new content: "${content}", on the platform:  ${this.type} ${this.name}`);
     }
 }
 
@@ -126,5 +126,5 @@ console.log("List of participants in the Mentorship program:");
 printAttendees(mentorship);
 console.log("List of participants in the Professiona development program:");
 printAttendees(development);
-console.log("List of participants in thetechnical expertise program:");
+console.log("List of participants in the Technical expertise program:");
 printAttendees(expertise);
