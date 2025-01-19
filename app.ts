@@ -124,7 +124,7 @@ function printAttendees(program: IEducationProgram): void {
 
 console.log("List of participants in the Mentorship program:");
 printAttendees(mentorship);
-console.log("List of participants in the Professiona development program:");
+console.log("List of participants in the Professional development program:");
 printAttendees(development);
 console.log("List of participants in the Technical expertise program:");
 printAttendees(expertise);
