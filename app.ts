@@ -1,130 +1,130 @@
-// INTERFACCE
-interface IProfessionistaMedia {
-    nome: string; 
-    cognome: string;
-    specializzazione: string; //giornalismo, regia, produzione, ecc.
-    esperienza: number; //esperienza in anni
-    interessi: string[];
+// INTERFACES
+interface IProfessionalMedia {
+    name: string; 
+    surname: string;
+    expertise: string; //journaling, directing, production, ecc.
+    experience: number; //experience in years
+    interests: string[];
 
-    partecipaProgramma(programma: IProgrammaFormazione): void; 
+    partecipatesToProgram(program: IEducationProgram): void; 
 }
 
-interface IProgrammaFormazione {
-    titolo: string;
-    descrizione: string;
-    ambitoSpecializzazione: string;
-    durata: number; //durata in giorni
-    elencoPartecipanti: IProfessionistaMedia[];
+interface IEducationProgram {
+    title: string;
+    description: string;
+    areaOfSpecialization: string;
+    duration: number; //duration in days
+    attendeeList: IProfessionalMedia[];
 
-    aggiungiPartecipante(professionista: IProfessionistaMedia): void;
+    addAttendee(professional: IProfessionalMedia): void;
 }
 
-interface IPiattaforma {
-    nome: string;
-    tipo: string; //stampato, online, audiovisivo
-    descrizione: string;
-    categorieContenuto: string[];
+interface IPlatform {
+    name: string;
+    type: string; //paper, online, video
+    description: string;
+    contentCategories: string[];
 
-    pubblicaContenuto(professionista: IProfessionistaMedia, contenuto: string): void;
+    publishContent(professional: IProfessionalMedia, content: string): void;
 }
 
-// CLASSI
-class ProfessionistaMedia implements IProfessionistaMedia {
-    nome: string; 
-    cognome: string;
-    specializzazione: string;
-    esperienza: number; //esperienza in anni
-    interessi: string[];
+// CLASSES
+class ProfessionalMedia implements IProfessionalMedia {
+    name: string; 
+    surname: string;
+    expertise: string;
+    experience: number; //experience in years
+    interests: string[];
 
-    constructor(nome: string, cognome: string, specializzazione: string, esperienza: number, interessi: string[]) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.specializzazione = specializzazione;
-        this.esperienza = esperienza;
-        this.interessi = interessi;
+    constructor(name: string, surname: string, expertise: string, experience: number, interests: string[]) {
+        this.name = name;
+        this.surname = surname;
+        this.expertise = expertise;
+        this.experience = experience;
+        this.interests = interests;
     }
 
-    partecipaProgramma(programma: IProgrammaFormazione): void {
-        programma.aggiungiPartecipante(this);
+    partecipatesToProgram(program: IEducationProgram): void {
+        program.addAttendee(this);
     }
 }
 
-class ProgrammaFormazione implements IProgrammaFormazione {
-    titolo: string;
-    descrizione: string;
-    ambitoSpecializzazione: string;
-    durata: number; // durata in giorni
-    elencoPartecipanti: IProfessionistaMedia[];
+class EducationProgram implements IEducationProgram {
+    title: string;
+    description: string;
+    areaOfSpecialization: string;
+    duration: number; // duration in days
+    attendeeList: IProfessionalMedia[];
 
-    constructor(titolo: string, descrizione: string, ambitoSpecializzazione: string, durata: number) {
-        this.titolo = titolo;
-        this.descrizione = descrizione;
-        this.ambitoSpecializzazione = ambitoSpecializzazione;
-        this.durata = durata;
-        this.elencoPartecipanti = [];
+    constructor(title: string, description: string, areaOfSpecialization: string, duration: number) {
+        this.title = title;
+        this.description = description;
+        this.areaOfSpecialization = areaOfSpecialization;
+        this.duration = duration;
+        this.attendeeList = [];
     }
     
-    aggiungiPartecipante(professionista: IProfessionistaMedia): void {
-        this.elencoPartecipanti.push(professionista);
+    addAttendee(professional: IProfessionalMedia): void {
+        this.attendeeList.push(professional);
     }
 }
 
-class Piattaforma implements IPiattaforma {
-    nome: string;
-    tipo: string; //stampato, online, audiovisivo
-    descrizione: string;
-    categorieContenuto: string[];
+class Platform implements IPlatform {
+    name: string;
+    type: string; //paper, online, video
+    description: string;
+    contentCategories: string[];
 
-    constructor (nome: string, tipo: string, descrizione: string, categorieContenuto: string[]){
-        this.nome = nome;
-        this.tipo = tipo;
-        this.descrizione = descrizione;
-        this.categorieContenuto = categorieContenuto;
+    constructor (name: string, type: string, description: string, contentCategories: string[]){
+        this.name = name;
+        this.type = type;
+        this.description = description;
+        this.contentCategories = contentCategories;
     }
 
-    pubblicaContenuto(professionista: IProfessionistaMedia, contenuto: string): void {
-        console.log(`Il professionista ${professionista.nome} ${professionista.cognome} ha pubblicato un nuovo contenuto: "${contenuto}", sulla piattaforma ${this.tipo} ${this.nome}`);
+    publishContent(professional: IProfessionalMedia, content: string): void {
+        console.log(`The professional ${professional.name} ${professional.surname} published new content: "${content}", on the platform:  ${this.type} ${this.name}`);
     }
 }
 
-// Istanza oggetti ProfessionistaMedia
-const professionista1 = new ProfessionistaMedia("Sara", "Rossi", "giornalista", 5, ["attualità", "diritti umani", "politica"]);
-const professionista2 = new ProfessionistaMedia("Vera", "Bianchi", "regista", 3, ["cinema", "teatro", "musica"]);
-const professionista3 = new ProfessionistaMedia("Bianca", "Verdi", "scrittore", 2, ["letteratura", "poesia", "storia"]);
+// Objects Instances ProfessionalMedia
+const professional1 = new ProfessionalMedia("Sara", "Rossi", "journalist", 5, ["law", "human rights", "policy"]);
+const professional2 = new ProfessionalMedia("Vera", "Bianchi", "director", 3, ["cinema", "theater", "music"]);
+const professional3 = new ProfessionalMedia("Bianca", "Verdi", "writer", 2, ["literature", "poetry", "history"]);
 
-// Istanze oggetti ProgrammaFormazione
-const mentorship = new ProgrammaFormazione("Mentorship", "Programma di mentorship per giovani professioniste donne.", "giornalismo", 12);
-const sviluppo = new ProgrammaFormazione("Sviluppo professionale", "Programma di sviluppo professionale per giovani professioniste donne.", "produzione", 10);
-const specializzazione = new ProgrammaFormazione("Specializzazione tecnica", "Programma di specializzazione tecnica per professioniste donne nel settore della comunicazione.", "media", 15);
+// Objects Instances EducationProgram
+const mentorship = new EducationProgram("Mentorship", "mentorship program for young professional women.", "journalism", 12);
+const development = new EducationProgram("Professional development", "developmentprogram for female professionals.", "manufactoring", 10);
+const expertise = new EducationProgram("Technical expertise", "technical expertise program for women in the communication industry.", "media", 15);
 
-// Istanze oggetti Piattaforma
-const web = new Piattaforma("Voci Weekly", "web", "Blog settimanale con approfondimenti e condivisione di storie di donne di successo", ["attualità", "cultura", "società"]);
-const social = new Piattaforma("@VociDiDonne", "Instagram", "Account Instagram dell'azienda, dove vengono pubblicate intervista, approfondimenti e punti di vista eterogenei sul mondo dell'imprenditoralità femminile", ["attualità", "imprenditoria", "giornalismo"]);
-const youtube = new Piattaforma("Voci di donne", "YouTube", "Canale YouTube dove l'azienda condivide interviste con varie figure e consigli per la crescita professionale delle donne", ["interviste", "cultura", "società"]);
-
-
-// Professioniste partecipano a programmi
-professionista1.partecipaProgramma(mentorship);
-professionista2.partecipaProgramma(sviluppo);
-professionista3.partecipaProgramma(specializzazione);
-professionista1.partecipaProgramma(specializzazione);
-
-// Professioniste condividono contenuti sulla piattaforma
-web.pubblicaContenuto(professionista3, "Saggio sulle disparità di genere nel mondo dell'informazione");
-youtube.pubblicaContenuto(professionista2, "La produzione cinematografica al femminile");
-social.pubblicaContenuto(professionista1, "Intervista a una donna imprenditrice di successo");
+// Objects Instances Platform
+const web = new Platform("Voices Weekly", "web", "Weekly blog with insights and stories of successful women", ["policy", "culture", "society"]);
+const social = new Platform("@FemaleVoices", "Instagram", "The company's Instagram account, where interviews, insights and diverse points of view on the world of female entrepreneurship are published,", ["culture", "enterpreneurship", "journalism"]);
+const youtube = new Platform("Female Voices", "YouTube", "YouTube channel where the company shares interviews with various figures and advice for the professional growth of women.", ["interviews", "culture", "society"]);
 
 
-// Elenco partecipanti ai programmi
-function stampaPartecipanti(programma: IProgrammaFormazione): void {
-    programma.elencoPartecipanti.forEach(professionista =>{
-        console.log(`${professionista.nome} ${professionista.cognome}`);
+// Professional participates to programs
+professional1.partecipatesToProgram(mentorship);
+professional2.partecipatesToProgram(development);
+professional3.partecipatesToProgram(expertise);
+professional1.partecipatesToProgram(expertise);
+
+// Professionals publish content on platforms
+web.publishContent(professional3, "Essay on gender disparities in the world of information");
+youtube.publishContent(professional2, "A female perspective of movie production");
+social.publishContent(professional1, "Interview with a successful female entrepreneur");
+
+
+// List attendees to the programs
+function printAttendees(program: IEducationProgram): void {
+    program.attendeeList.forEach(professional =>{
+        console.log(`${professional.name} ${professional.surname}`);
     });
 };
 
-console.log("Elenco partecipanti al programma di Mentorship:");
-stampaPartecipanti(mentorship);
-console.log("Elenco partecipanti al programma di Sviluppo Professionale:");
-stampaPartecipanti(sviluppo);
-console.log("Elenco partecipanti al programma di Specializzazione Tecnica:");
-stampaPartecipanti(specializzazione);
+console.log("List of participants in the Mentorship program:");
+printAttendees(mentorship);
+console.log("List of participants in the Professiona development program:");
+printAttendees(development);
+console.log("List of participants in thetechnical expertise program:");
+printAttendees(expertise);
